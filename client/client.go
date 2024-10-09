@@ -349,13 +349,6 @@ func FormatJSON(raw []byte) (string, error) {
 		}
 	}
 
-	// Ignore the huge catalog output
-	if v, ok := data["token"].(map[string]interface{}); ok {
-		if _, ok := v["catalog"]; ok {
-			v["catalog"] = "***"
-		}
-	}
-
 	pretty, err := json.MarshalIndent(data, "", "  ")
 	if err != nil {
 		return string(raw), fmt.Errorf("unable to re-marshal OpenStack JSON: %s", err)
